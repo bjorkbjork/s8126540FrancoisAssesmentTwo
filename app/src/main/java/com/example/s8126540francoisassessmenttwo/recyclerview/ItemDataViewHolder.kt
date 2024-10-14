@@ -20,11 +20,14 @@ class ItemDataViewHolder(view: View, private val navigationFunction: (ItemData) 
     private val button: Button = view.findViewById(R.id.navigationButton)
 
     fun bind(itemData: ItemData, position: Int) {
+        // Get the specific Entity object at the current position
         val entity = itemData.entities[position]
-        courseCode.text = entity.courseCode
-        courseName.text = entity.courseName
-        instructor.text = entity.instructor
-        credits.text = entity.credits.toString() // Convert credits (Int) to String
+
+        // Set the text for each TextView from the entity
+        courseCode.text = entity.key1
+        courseName.text = entity.key2
+        instructor.text = entity.key3
+        credits.text = entity.key4.toString() // Convert credits (Int) to String
 
     }
 }

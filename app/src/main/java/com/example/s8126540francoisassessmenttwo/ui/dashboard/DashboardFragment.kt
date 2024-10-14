@@ -17,8 +17,10 @@ import com.example.s8126540francoisassessmenttwo.R
 import com.example.s8126540francoisassessmenttwo.data.ItemData
 import com.example.s8126540francoisassessmenttwo.databinding.FragmentDashboardBinding
 import com.example.s8126540francoisassessmenttwo.recyclerview.RecyclerViewAdapter
+import com.squareup.moshi.JsonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
@@ -34,7 +36,6 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,6 +48,8 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         navigationFunctionLambda = { itemData ->
             // Define your navigation or actions here

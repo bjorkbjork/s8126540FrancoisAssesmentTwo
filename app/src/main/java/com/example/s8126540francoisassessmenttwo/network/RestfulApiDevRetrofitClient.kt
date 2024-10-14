@@ -1,5 +1,8 @@
 package com.example.s8126540francoisassessmenttwo.network
 
+import android.content.Entity
+import com.example.s8126540francoisassessmenttwo.adapter.EntityJsonAdapter
+import com.example.s8126540francoisassessmenttwo.adapter.ItemDataJsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -17,8 +20,13 @@ class RestfulApiDevRetrofitClient {
         .addInterceptor(logging)
         .build()
     private val moshi = Moshi.Builder()
+        .add(EntityJsonAdapter())
+        .add(ItemDataJsonAdapter())
         .add(KotlinJsonAdapterFactory())
         .build()
+
+    val jsonAdapter = moshi.adapter(Entity::class.java)
+
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))

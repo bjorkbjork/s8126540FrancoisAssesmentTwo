@@ -6,11 +6,10 @@ import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@JsonClass(generateAdapter = true)
 data class Entity(
-    val courseCode: String,
-    val courseName: String,
-    val instructor: String,
-    val credits: Int,
-    val description: String
+    val key1: String,
+    val key2: String,
+    val key3: String,
+    val key4: Int,
+    val key5: String
 ):Parcelable
