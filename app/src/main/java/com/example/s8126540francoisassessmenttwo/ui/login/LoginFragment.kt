@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.s8126540francoisassessmenttwo.databinding.FragmentLoginBinding
 import com.example.s8126540francoisassessmenttwo.R
+import com.example.s8126540francoisassessmenttwo.data.ItemData
 import com.example.s8126540francoisassessmenttwo.data.Keypass
 import com.example.s8126540francoisassessmenttwo.data.User
 import com.example.s8126540francoisassessmenttwo.ui.dashboard.DashboardFragmentArgs
@@ -49,6 +50,12 @@ class LoginFragment : Fragment() {
         return root
     }
 
+    init{
+
+
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -76,10 +83,9 @@ class LoginFragment : Fragment() {
 
             if( firstName.isNotEmpty() && studentId.isNotEmpty() ){
 
-//                Inject constructor(private val repository: RestfulApiDevRepositoryClass)
                 lifecycleScope.launch{
                     try {
-                        loginViewModel.logInUser(user)?.observe(viewLifecycleOwner) { key ->
+                        loginViewModel.logInUser(user).observe(viewLifecycleOwner) { key ->
                             if (key != null) {
                                 Log.v("NIT3213", "$key")
                                 findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = key))

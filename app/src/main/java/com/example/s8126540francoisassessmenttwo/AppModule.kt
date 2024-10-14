@@ -24,7 +24,6 @@ object AppModule {
     @Named("StringTwo")
     fun provideStringTwo():String {return "This is the value of string two, from the Application Module"}
 
-    @Singleton
     @Provides
     fun provideRestfulApiDevService(): RestfulApiDevService {
         return RestfulApiDevRetrofitClient().restfulApiDevService

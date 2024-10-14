@@ -12,6 +12,8 @@ import com.example.s8126540francoisassessmenttwo.data.Keypass
 import com.example.s8126540francoisassessmenttwo.data.RestfulApiDevRepositoryClass
 import com.example.s8126540francoisassessmenttwo.data.User
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Delay
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -27,25 +29,33 @@ class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRe
         value = "This is notifications Fragment"
     }
 
-    private val apiResponseObjects = MutableStateFlow<List<ItemData>>(listOf())
+//    var responseData = MutableLiveData<ItemData>()
 
     init{
-        val data:Entity
-        viewModelScope.launch {
-            try {
-                //val result: (suspend () -> Entity) = suspend { repository.getAllObjectsData("course") }
-                val x = "course"
-                Log.v("NIT3213","${repository.getAllObjectsData(x)}")
-            } catch (ex:Exception){
-                Log.v("Errors","$ex")
-            }
-        }
+//        val data:Entity
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//
+//                val result:(suspend () -> ItemData) = suspend { repository.getAllObjectsData("courses") }
+//                responseData.postValue(result.invoke())
+//
+//
+//            } catch (ex:Exception){
+//                Log.v("Errors","$ex")
+//            }
+//        }
+//        viewModelScope.launch {
+//            val x = getData("courses")
+//            delay(10000)
+//            Log.v("NIT3213","$x")
+//        }
     }
 
     suspend fun logInUser(user: User): MutableLiveData<Keypass?> {
             val keypass = MutableLiveData<Keypass?>()
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO) {
                 try {
+                    // since API returns Keypass(keypass="x"), and that is how I structured my class, create lambda function
                     val result: (suspend () -> Keypass) = suspend { repository.addUser(user) }
                     keypass.postValue(result.invoke())
                 } catch (ex:Exception){

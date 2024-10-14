@@ -8,26 +8,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.s8126540francoisassessmenttwo.R
 import com.example.s8126540francoisassessmenttwo.data.ItemData
+import com.example.s8126540francoisassessmenttwo.data.Entity
 
 class ItemDataViewHolder(view: View, private val navigationFunction: (ItemData) -> Unit) : RecyclerView.ViewHolder(view) {
 
 
-    private val name: TextView = view.findViewById(R.id.itemNametext)
-    private val id: TextView = view.findViewById(R.id.itemIdText)
-    private val details: TextView = view.findViewById(R.id.detailsText)
+    private val courseCode: TextView = view.findViewById(R.id.itemNametext)
+    private val courseName: TextView = view.findViewById(R.id.itemIdText)
+    private val instructor: TextView = view.findViewById(R.id.detailsText)
+    private val credits: TextView = view.findViewById(R.id.intText)
     private val button: Button = view.findViewById(R.id.navigationButton)
 
-    fun bind(item: ItemData) {
-//        name.text = item.objectName
-//        id.text = "Id: " + item.id
-//        val showDetails = if (item.dataSection.isNullOrEmpty()) View.INVISIBLE else View.VISIBLE
-//        details.visibility = showDetails
-//        button.visibility = showDetails
-//
-//        if (showDetails == View.VISIBLE) {
-//            button.setOnClickListener {
-//                navigationFunction(item)
-//            }
-//        }
+    fun bind(itemData: ItemData, position: Int) {
+        val entity = itemData.entities[position]
+        courseCode.text = entity.courseCode
+        courseName.text = entity.courseName
+        instructor.text = entity.instructor
+        credits.text = entity.credits.toString() // Convert credits (Int) to String
+
     }
 }

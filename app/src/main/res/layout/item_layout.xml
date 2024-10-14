@@ -21,6 +21,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text=""
+            android:textSize="15sp"
             android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textColor="#303F9F"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text=""
+
+            android:textSize="15sp"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:textColor="#303F9F"
             app:layout_constraintStart_toStartOf="@id/itemNametext"
@@ -40,11 +43,27 @@
             tools:text="ID: 2" />
 
         <TextView
+            android:id="@+id/intText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text=""
+
+            android:textSize="15sp"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="#303F9F"
+            app:layout_constraintStart_toStartOf="@id/itemIdText"
+            app:layout_constraintTop_toBottomOf="@id/itemIdText"
+            tools:text="ID: 2" />
+
+        <TextView
             android:id="@+id/detailsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/more_details_are_available"
+            android:text=""
+
+            android:textSize="15sp"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:textColor="#00796B"
             app:layout_constraintStart_toStartOf="@id/itemIdText"
@@ -59,7 +78,9 @@
             android:layout_marginEnd="8dp"
             app:cornerRadius="8dp"
             android:backgroundTint="#00BCD4"
-            android:text="@string/show_data"
+            android:text=""
+
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@id/detailsText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/detailsText" />

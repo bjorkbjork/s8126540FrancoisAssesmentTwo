@@ -1,27 +1,28 @@
 package com.example.s8126540francoisassessmenttwo.recyclerview
 
+import android.content.ClipData.Item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s8126540francoisassessmenttwo.R
 import com.example.s8126540francoisassessmenttwo.data.ItemData
 
-class RecyclerViewAdapter(private val dataList: MutableList<ItemData> = mutableListOf(), private val navigationFunction: (ItemData) -> Unit) : RecyclerView.Adapter<ResponseItemViewHolder>() {
+class RecyclerViewAdapter(private var data: ItemData, private val navigationFunction: (ItemData) -> Unit) : RecyclerView.Adapter<ItemDataViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResponseItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemDataViewHolder {
         val view = LayoutInflater.from(parent.context) .inflate(R.layout.item_layout, parent, false)
-        return ResponseItemViewHolder(view, navigationFunction = navigationFunction)
+        return ItemDataViewHolder(view, navigationFunction = navigationFunction)
     }
 
-    override fun onBindViewHolder(viewHolder: ResponseItemViewHolder, position: Int) {
-        viewHolder.bind(dataList[position])
+    override fun onBindViewHolder(viewHolder: ItemDataViewHolder, position: Int) {
+        // Bind the specific Entity from the single ItemData instance
+        viewHolder.bind(data, position)
     }
 
-    override fun getItemCount() = dataList.size
+    override fun getItemCount() = data.entities.size
 
-    fun setData(newDataList: List<ItemData>) {
-        dataList.clear()
-        dataList.addAll(newDataList)
+    fun setData(newData: ItemData) {
+        data = newData
         notifyDataSetChanged()
     }
 }
