@@ -1,6 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
+
 }
 
 android {
@@ -39,6 +44,13 @@ android {
 }
 
 dependencies {
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.logging.interceptor)
+
+    implementation(libs.hilt.android)
+    kapt(libs.dagger.hilt.android.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -51,4 +63,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+kapt {
+    correctErrorTypes = true
 }

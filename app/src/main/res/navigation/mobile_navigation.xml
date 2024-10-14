@@ -3,23 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_login">
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.s8126540francoisassessmenttwo.ui.home.HomeFragment"
+        android:name="com.example.s8126540francoisassessmenttwo.ui.detail.DetailFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="data"
+            app:argType="com.example.s8126540francoisassessmenttwo.data.ItemData"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.s8126540francoisassessmenttwo.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_dashboard">
+<!--        <action-->
+<!--            android:id="@+id/loggedOut"-->
+<!--            app:destination="@id/navigation_login"/>-->
+        <argument
+            android:name="keypass"
+            app:argType="com.example.s8126540francoisassessmenttwo.data.Keypass" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.s8126540francoisassessmenttwo.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_login"
+        android:name="com.example.s8126540francoisassessmenttwo.ui.login.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/loggedIn"
+            app:destination="@id/navigation_dashboard"/>
+    </fragment>
 </navigation>
