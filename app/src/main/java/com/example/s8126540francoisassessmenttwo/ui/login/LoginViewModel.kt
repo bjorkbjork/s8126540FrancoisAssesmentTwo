@@ -1,10 +1,12 @@
 package com.example.s8126540francoisassessmenttwo.ui.login
 
+import android.content.ClipData.Item
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.s8126540francoisassessmenttwo.data.Entity
 import com.example.s8126540francoisassessmenttwo.data.ItemData
 import com.example.s8126540francoisassessmenttwo.data.Keypass
 import com.example.s8126540francoisassessmenttwo.data.RestfulApiDevRepositoryClass
@@ -28,15 +30,16 @@ class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRe
     private val apiResponseObjects = MutableStateFlow<List<ItemData>>(listOf())
 
     init{
-//        viewModelScope.launch {
-//            val user = User("Francois", "s8126540")
-//            try {
-//                val result: (suspend () -> Keypass) = suspend { repository.addUser(user) }
-//                val keypass = result.invoke()
-//            } catch(ex: Exception) {
-//                Log.v("NIT3213", "$ex")
-//            }
-//        }
+        val data:Entity
+        viewModelScope.launch {
+            try {
+                //val result: (suspend () -> Entity) = suspend { repository.getAllObjectsData("course") }
+                val x = "course"
+                Log.v("NIT3213","${repository.getAllObjectsData(x)}")
+            } catch (ex:Exception){
+                Log.v("Errors","$ex")
+            }
+        }
     }
 
     suspend fun logInUser(user: User): MutableLiveData<Keypass?> {
