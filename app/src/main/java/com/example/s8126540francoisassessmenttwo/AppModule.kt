@@ -1,6 +1,7 @@
 package com.example.s8126540francoisassessmenttwo
 
 
+import com.example.s8126540francoisassessmenttwo.data.Exceptions
 import com.example.s8126540francoisassessmenttwo.network.RestfulApiDevService
 import com.example.s8126540francoisassessmenttwo.network.RestfulApiDevRetrofitClient
 import dagger.Module
@@ -27,6 +28,11 @@ object AppModule {
     @Provides
     fun provideRestfulApiDevService(): RestfulApiDevService {
         return RestfulApiDevRetrofitClient().restfulApiDevService
+    }
+
+    @Provides
+    fun provideHttpExceptions(): List<Exception> {
+        return listOf(Exceptions().invalid, Exceptions().timeout, Exceptions().offline)
     }
 
 }

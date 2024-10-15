@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.s8126540francoisassessmenttwo.R
 import com.example.s8126540francoisassessmenttwo.data.Entity
+import com.example.s8126540francoisassessmenttwo.data.Exceptions
 import com.example.s8126540francoisassessmenttwo.data.ItemData
 import com.example.s8126540francoisassessmenttwo.data.Keypass
 import com.example.s8126540francoisassessmenttwo.data.RestfulApiDevRepositoryClass
@@ -18,16 +20,21 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 
 import javax.inject.Inject
 
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRepositoryClass): ViewModel() {
+class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRepositoryClass, private val exceptions: List<Exceptions>): ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"
     }
+
+    val keypass = MutableStateFlow<Keypass?>(value = null)
+    val errors = MutableStateFlow<Exception?>(value = null)
+    val result = MutableStateFlow<Pair<MutableStateFlow<Keypass?>, MutableStateFlow<Exception?>>>(Pair(keypass, errors))
 
 //    var responseData = MutableLiveData<ItemData>()
 
@@ -51,19 +58,35 @@ class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRe
 //        }
     }
 
-    suspend fun logInUser(user: User): MutableLiveData<Keypass?> {
-            val keypass = MutableLiveData<Keypass?>()
-            viewModelScope.launch(Dispatchers.IO) {
-                try {
-                    // since API returns Keypass(keypass="x"), and that is how I structured my class, create lambda function
-                    val result: (suspend () -> Keypass) = suspend { repository.addUser(user) }
-                    keypass.postValue(result.invoke())
-                } catch (ex:Exception){
-                    Log.v("Errors","$ex")
-                    keypass.postValue(null)
-                }
+    suspend fun logInUser(user: User): Pair<MutableStateFlow<Keypass?>, MutableStateFlow<Exception?>> {
+//            viewModelScope.launch(Dispatchers.IO) {
+//                try {
+//                    // since API returns Keypass(keypass="x"), and that is how I structured my class, create lambda function
+//                    val result: (suspend () -> Keypass) = suspend { repository.addUser(user) }
+//                    keypass.value = (result.invoke())
+//                } catch (ex:Exception){
+//                    Log.v("Errors","$ex")
+//                    errors.value = ex
+//                    keypass.value = null
+//                }
+//            }
+//            // return keypass, plus any errors
+//            result.value = Pair(keypass, errors)
+//            return result.value
+            return withContext(Dispatchers.IO){
+                 try{
+                     val result: (suspend () -> Keypass) = suspend { repository.addUser(user) }
+                     keypass.value = (result.invoke())
+                     errors.value = null
+                 } catch(ex:Exception){
+                     keypass.value = null
+                     val error = Regex(ex.toString())
+                     errors.value = if (error.containsMatchIn("timeout")) Exception("timeout");
+                                    else if (error.containsMatchIn("400")) Exception("invalid")
+                                    else ex
+                 }
+                Pair(keypass,errors)
             }
-            return keypass
     }
 
 

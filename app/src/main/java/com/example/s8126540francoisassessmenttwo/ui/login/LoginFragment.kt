@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -85,17 +86,33 @@ class LoginFragment : Fragment() {
 
                 lifecycleScope.launch{
                     try {
-                        loginViewModel.logInUser(user).observe(viewLifecycleOwner) { key ->
-                            if (key != null) {
-                                Log.v("NIT3213", "$key")
-                                findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = key))
-                            } else {
-                                Log.v("NIT3213", "ERROR")
-                                buttonHelperText.text = resources.getString(R.string.invalidLogin)
-                            }
+//                        loginViewModel.logInUser(user)
+//                        loginViewModel.result.collect { result ->
+//                            if (result.first != null) {
+//                                Log.v("NIT3213", "${result.first}")
+//                                findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = result.first.value!!))
+//                            } else {
+//                                Log.v("NIT3213", "${result.second}")
+//
+//                                buttonHelperText.text = resources.getString(R.string.invalidLogin)
+//                            }
+//                        }
+                        val result = loginViewModel.logInUser(user)
+                        if (result.first.value != null) {
+                            Log.v("NIT3213!!", "${result.first.value}")
+                            findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = result.first.value!!))
+                        } else {
+                            Log.v("errors123", "${result.second.value}")
+
+                            val error = result.second.value; val timeout = Exception("timeout"); val invalid = Exception("invalid");
+
+                            buttonHelperText.text = if (error == timeout) "Please try again later"
+                                                    else if (error == invalid) resources.getString(R.string.invalidLogin)
+                                                    else "$error"
+
                         }
                     } catch(ex: Exception){
-                        Log.v("NIT3213", "$ex")
+                        Log.v("NIT3213er", "$ex")
                     }
                 }
 
@@ -108,7 +125,6 @@ class LoginFragment : Fragment() {
 
                 studentIdWrapper.helperText = if (studentId.isEmpty()) resources.getString(R.string.required) else ""
 
-                // TODO: Add email validation. Probably overkill for this assignment, but I want to give it a try at some point
             }
         }
 
