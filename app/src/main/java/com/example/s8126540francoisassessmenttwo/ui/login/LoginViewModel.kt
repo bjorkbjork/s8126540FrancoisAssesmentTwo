@@ -75,16 +75,24 @@ class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRe
 //            return result.value
             return withContext(Dispatchers.IO){
                  try{
+                     // since API returns Keypass(keypass="x"), and that is how I structured my class, create lambda function
                      val result: (suspend () -> Keypass) = suspend { repository.addUser(user) }
+                     // invoke the lambda function: expected return of result: Keypass(keypass = "x")
                      keypass.value = (result.invoke())
+                     // set errors to null, as try worked
                      errors.value = null
+
                  } catch(ex:Exception){
+                     // set keypass to null, as something has gone wrong
                      keypass.value = null
+                     // check for matches in Retrofit exception
                      val error = Regex(ex.toString())
+                     // set value of errors based upon regex
                      errors.value = if (error.containsMatchIn("timeout")) Exception("timeout");
                                     else if (error.containsMatchIn("400")) Exception("invalid")
                                     else ex
                  }
+                // return tuple, keypass and errors
                 Pair(keypass,errors)
             }
     }

@@ -97,22 +97,26 @@ class LoginFragment : Fragment() {
 //                                buttonHelperText.text = resources.getString(R.string.invalidLogin)
 //                            }
 //                        }
+                        // get keypass
                         val result = loginViewModel.logInUser(user)
+
+                        // if keypass returned not as null, then we have a working keypass
                         if (result.first.value != null) {
-                            Log.v("NIT3213!!", "${result.first.value}")
+                            Log.v("NIT3213", "${result.first.value}")
                             findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = result.first.value!!))
-                        } else {
-                            Log.v("errors123", "${result.second.value}")
+                        } else { // else something has gone wrong, so we have errors to handle
+                            Log.v("NIT3213", "${result.second.value}")
 
                             val error = result.second.value; val timeout = Exception("timeout"); val invalid = Exception("invalid");
 
+                            // display errors to user
                             buttonHelperText.text = if (error == timeout) "Please try again later"
                                                     else if (error == invalid) resources.getString(R.string.invalidLogin)
                                                     else "$error"
 
                         }
                     } catch(ex: Exception){
-                        Log.v("NIT3213er", "$ex")
+                        Log.v("NIT3213", "$ex")
                     }
                 }
 

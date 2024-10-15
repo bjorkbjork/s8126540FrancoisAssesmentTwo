@@ -11,12 +11,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s8126540francoisassessmenttwo.R
 import com.example.s8126540francoisassessmenttwo.data.ItemData
 import com.example.s8126540francoisassessmenttwo.databinding.FragmentDashboardBinding
 import com.example.s8126540francoisassessmenttwo.recyclerview.RecyclerViewAdapter
+import com.example.s8126540francoisassessmenttwo.ui.login.LoginFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -64,15 +66,25 @@ class DashboardFragment : Fragment() {
 
         lifecycleScope.launch{
             try {
-                dashboardViewModel.getData(arguments.keypass).observe(viewLifecycleOwner) { data ->
-                    if (data != null) {
-                        Log.v("NIT3213!!!!", "$data")
-                        lifecycleScope.launch {
-                            recyclerViewAdapter.setData(data)
-                        }
-                    } else {
-                        Log.v("NIT3213", "ERROR")
+                // get data from viewmodel, passing keypass
+                val data = dashboardViewModel.getData(arguments.keypass)
+
+                // if data returned as not null, set up recyclerview
+                if (data.first.value != null) {
+                    Log.v("NIT3213", "${data.first.value}")
+                    lifecycleScope.launch{
+                        recyclerViewAdapter.setData(data.first.value!!)
                     }
+                } else { // keypass is given by API - so there should never be errors, unless the API goes down. Handle anyway.
+                    Log.v("NIT3213", "${data.second.value}")
+
+                    val error = data.second.value;
+                    val timeout = Exception("timeout");
+                    val invalid = Exception("invalid");
+
+                    textView.text = if (error == timeout) "Please try again later"
+                                    else if (error == invalid) resources.getString(R.string.invalidLogin)
+                                    else "$error"
                 }
             } catch(ex: Exception){
                 Log.v("NIT3213", "$ex")
