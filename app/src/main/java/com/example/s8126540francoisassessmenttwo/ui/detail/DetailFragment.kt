@@ -52,7 +52,8 @@ class DetailFragment : Fragment() {
         val button = binding.navigationButton
 
         button.setOnClickListener{
-            findNavController().navigate(R.id.goBack)
+            // use popBackStack, rather than navigate, as it persists the keypass.
+            findNavController().popBackStack()
         }
     }
 

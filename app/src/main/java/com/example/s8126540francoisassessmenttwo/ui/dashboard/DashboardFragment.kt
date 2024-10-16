@@ -73,7 +73,7 @@ class DashboardFragment : Fragment() {
         textView.text = arguments.keypass.keypass.toString()
 
         loadingScroll.isVisible = false
-
+        
         lifecycleScope.launch{
             try {
                 loadingScroll.isVisible = true
