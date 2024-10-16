@@ -6,6 +6,7 @@
     <string name="email">Username</string>
     <string name="password">Password</string>
     <string name="required">Required</string>
+    <string name="creditsPre">Credits: </string>
     <string name="recommended">Recommended for You</string>
     <string name="searchText">Search for meditation types…</string>
     <string name="welcome">Welcome to Calm</string>
@@ -38,4 +39,7 @@
     <string name="firstName">First Name</string>
     <string name="studentId">Student ID</string>
     <string name="invalidLogin">Invalid login details</string>
+    <string name="credits">Credits: %1$d</string>
+    <string name="details">Details...</string>
+    <string name="back">BACK</string>
 </resources>

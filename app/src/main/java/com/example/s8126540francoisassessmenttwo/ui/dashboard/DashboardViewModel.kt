@@ -47,9 +47,9 @@ class DashboardViewModel @Inject constructor(private val repository: RestfulApiD
 
         return withContext(Dispatchers.IO){
             try{
-                // since API returns Keypass(keypass="x"), and that is how I structured my class, create lambda function
+                // since API returns ItemData(entities = [Entity(x), Entity(y)], entityTotal = z), and that is how I structured my class, create lambda function
                 val result: (suspend () -> ItemData) = suspend { repository.getAllObjectsData(keypass.keypass.toString()) }
-                // invoke the lambda function: expected return of result: ItemData(entities = [x], entityTotal = y)
+                // invoke the lambda function: expected return of result: ItemData(entities = [Entity(x), Entity(y)], entityTotal = z)
                 responseData.value = (result.invoke())
                 // set errors to null, as try worked
                 errors.value = null

@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.logging.interceptor)
 
     implementation(libs.hilt.android)
+    testImplementation(libs.junit.jupiter)
     kapt(libs.dagger.hilt.android.compiler)
 
     implementation(libs.androidx.core.ktx)
@@ -63,7 +64,22 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    testImplementation(libs.mockk) // Core MockK library for local unit tests
+    testImplementation(libs.mockk.android) // Android-specific MockK for local unit tests
+    testImplementation(libs.mockk.agent) // MockK agent for advanced mocking (e.g., static methods)
+    testImplementation(libs.junit) // JUnit for local unit tests
+
+    // Instrumented test dependencies (run on an Android device or emulator)
+    androidTestImplementation(libs.mockk.android) // Android- specific MockK for instrumented tests
+    androidTestImplementation(libs.mockk.agent) // MockK agent for advanced mocking in instrumented tests
+    androidTestImplementation(libs.androidx.junit.v113) // AndroidX JUnit for instrumented tests
+
+
+
 }
+
+
 
 kapt {
     correctErrorTypes = true

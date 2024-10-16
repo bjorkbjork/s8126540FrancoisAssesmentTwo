@@ -11,16 +11,18 @@ import com.example.s8126540francoisassessmenttwo.databinding.FragmentDetailBindi
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import android.util.Log
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.s8126540francoisassessmenttwo.R
+import com.example.s8126540francoisassessmenttwo.ui.dashboard.DashboardFragmentArgs
 import javax.inject.Named
 
-@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
-    @Inject
-    @Named("StringTwo")
-    lateinit var myStringOne:String
-
+    private val arguments: DetailFragmentArgs by navArgs()
     private var _binding: FragmentDetailBinding? = null
+
+    //private val detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -31,20 +33,29 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val detailViewModel =
-            ViewModelProvider(this).get(DetailViewModel::class.java)
 
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        Log.v("NIT3213", "this is string $myStringOne")
-
-        val textView: TextView = binding.textHome
-        detailViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.itemCode.text = arguments.entity.courseCode
+        binding.itemName.text = arguments.entity.courseName
+        binding.intText.text = context?.getString(R.string.credits, arguments.entity.credits)
+        binding.itemPerson.text = arguments.entity.instructor
+        binding.itemDetials.text = arguments.entity.description
+
+        val button = binding.navigationButton
+
+        button.setOnClickListener{
+            findNavController().navigate(R.id.goBack)
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

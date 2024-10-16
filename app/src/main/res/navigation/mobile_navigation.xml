@@ -6,13 +6,16 @@
     app:startDestination="@+id/navigation_login">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_detail"
         android:name="com.example.s8126540francoisassessmenttwo.ui.detail.DetailFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_detail">
         <argument
-            android:name="data"
-            app:argType="com.example.s8126540francoisassessmenttwo.data.ItemData"/>
+            android:name="entity"
+            app:argType="com.example.s8126540francoisassessmenttwo.data.Entity"/>
+        <action
+            android:id="@+id/goBack"
+            app:destination="@id/navigation_dashboard"/>
     </fragment>
 
     <fragment
@@ -20,9 +23,12 @@
         android:name="com.example.s8126540francoisassessmenttwo.ui.dashboard.DashboardFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_dashboard">
-<!--        <action-->
-<!--            android:id="@+id/loggedOut"-->
-<!--            app:destination="@id/navigation_login"/>-->
+        <action
+            android:id="@+id/detailsScreen"
+            app:destination="@id/navigation_detail"/>
+        <action
+            android:id="@+id/loggedOut"
+            app:destination="@id/navigation_login"/>
         <argument
             android:name="keypass"
             app:argType="com.example.s8126540francoisassessmenttwo.data.Keypass" />

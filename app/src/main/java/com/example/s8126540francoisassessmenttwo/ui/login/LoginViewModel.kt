@@ -26,7 +26,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRepositoryClass, private val exceptions: List<Exceptions>): ViewModel() {
+class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRepositoryClass): ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

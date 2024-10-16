@@ -15,7 +15,7 @@
         android:layout_marginBottom="16dp">
 
         <TextView
-            android:id="@+id/itemNametext"
+            android:id="@+id/itemCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -29,7 +29,7 @@
             tools:text="Name" />
 
         <TextView
-            android:id="@+id/itemIdText"
+            android:id="@+id/itemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -38,8 +38,8 @@
             android:textSize="15sp"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:textColor="#303F9F"
-            app:layout_constraintStart_toStartOf="@id/itemNametext"
-            app:layout_constraintTop_toBottomOf="@id/itemNametext"
+            app:layout_constraintStart_toStartOf="@id/itemCode"
+            app:layout_constraintTop_toBottomOf="@id/itemCode"
             tools:text="ID: 2" />
 
         <TextView
@@ -52,12 +52,12 @@
             android:textSize="15sp"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:textColor="#303F9F"
-            app:layout_constraintStart_toStartOf="@id/itemIdText"
-            app:layout_constraintTop_toBottomOf="@id/itemIdText"
+            app:layout_constraintStart_toStartOf="@id/itemName"
+            app:layout_constraintTop_toBottomOf="@id/itemName"
             tools:text="ID: 2" />
 
         <TextView
-            android:id="@+id/detailsText"
+            android:id="@+id/itemPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -66,8 +66,8 @@
             android:textSize="15sp"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:textColor="#00796B"
-            app:layout_constraintStart_toStartOf="@id/itemIdText"
-            app:layout_constraintTop_toBottomOf="@id/itemIdText"
+            app:layout_constraintStart_toStartOf="@id/itemName"
+            app:layout_constraintTop_toBottomOf="@id/itemName"
             tools:text="More details are available" />
 
         <com.google.android.material.button.MaterialButton
@@ -81,9 +81,9 @@
             android:text=""
 
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@id/detailsText"
+            app:layout_constraintBottom_toBottomOf="@id/itemPerson"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/detailsText" />
+            app:layout_constraintTop_toTopOf="@id/itemPerson" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

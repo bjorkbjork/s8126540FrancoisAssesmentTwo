@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:context=".ui.dashboard.DashboardFragment"
+    android:background="@color/light_blue">
 
     <TextView
         android:id="@+id/screenTitle"
@@ -15,16 +16,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.165" />
+        app:layout_constraintVertical_bias="0.1"
+        tools:text="TEXT"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/navigationButton"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:cornerRadius="8dp"
+        android:backgroundTint="#00BCD4"
+        android:text="Log out"
+        app:layout_constraintBottom_toTopOf="@id/screenTitle"
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:textSize="15sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:minHeight="200dp"
+        android:mirrorForRtl="false"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/screenTitle"
+        app:layout_constraintTop_toBottomOf="@+id/navigationButton"
         tools:layout_editor_absoluteX="0dp"
-        tools:listitem="@layout/item_layout_restful_api_dev" />
+        tools:listitem="@layout/item_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

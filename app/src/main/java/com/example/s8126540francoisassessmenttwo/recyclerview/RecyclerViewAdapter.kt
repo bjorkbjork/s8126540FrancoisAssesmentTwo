@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s8126540francoisassessmenttwo.R
+import com.example.s8126540francoisassessmenttwo.data.Entity
 import com.example.s8126540francoisassessmenttwo.data.ItemData
 
-class RecyclerViewAdapter(private var data: ItemData, private val navigationFunction: (ItemData) -> Unit) : RecyclerView.Adapter<ItemDataViewHolder>() {
+class RecyclerViewAdapter(private var data: ItemData, private val navigationFunction: (Entity) -> Unit) : RecyclerView.Adapter<ItemDataViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemDataViewHolder {
         val view = LayoutInflater.from(parent.context) .inflate(R.layout.item_layout, parent, false)

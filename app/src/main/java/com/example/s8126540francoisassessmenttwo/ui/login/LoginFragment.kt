@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
@@ -71,6 +73,10 @@ class LoginFragment : Fragment() {
         val studentIdWrapper: TextInputLayout = binding.studentIdWrapper;
         val buttonHelperText: TextView = binding.buttonHelperText;
 
+        val loadingScroll: ProgressBar = binding.progressBar;
+
+        loadingScroll.isVisible = false
+
         loginButton.setOnClickListener{
 
             buttonHelperText.text = ""
@@ -86,25 +92,18 @@ class LoginFragment : Fragment() {
 
                 lifecycleScope.launch{
                     try {
-//                        loginViewModel.logInUser(user)
-//                        loginViewModel.result.collect { result ->
-//                            if (result.first != null) {
-//                                Log.v("NIT3213", "${result.first}")
-//                                findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = result.first.value!!))
-//                            } else {
-//                                Log.v("NIT3213", "${result.second}")
-//
-//                                buttonHelperText.text = resources.getString(R.string.invalidLogin)
-//                            }
-//                        }
-                        // get keypass
+                        loadingScroll.isVisible = true
+
                         val result = loginViewModel.logInUser(user)
 
                         // if keypass returned not as null, then we have a working keypass
                         if (result.first.value != null) {
+                            loadingScroll.isVisible = false
                             Log.v("NIT3213", "${result.first.value}")
                             findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = result.first.value!!))
                         } else { // else something has gone wrong, so we have errors to handle
+                            loadingScroll.isVisible = false
+
                             Log.v("NIT3213", "${result.second.value}")
 
                             val error = result.second.value; val timeout = Exception("timeout"); val invalid = Exception("invalid");
