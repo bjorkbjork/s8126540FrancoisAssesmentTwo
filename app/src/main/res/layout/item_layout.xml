@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:backgroundTint="#c7ecee">
+    android:backgroundTint="#c7ecee"
+    app:cardCornerRadius="25dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -76,10 +77,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            app:cornerRadius="8dp"
+            app:cornerRadius="16dp"
             android:backgroundTint="#00BCD4"
             android:text=""
-
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@id/itemPerson"
             app:layout_constraintEnd_toEndOf="parent"

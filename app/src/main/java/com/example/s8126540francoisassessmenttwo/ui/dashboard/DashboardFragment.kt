@@ -73,7 +73,7 @@ class DashboardFragment : Fragment() {
         textView.text = arguments.keypass.keypass.toString()
 
         loadingScroll.isVisible = false
-        
+
         lifecycleScope.launch{
             try {
                 loadingScroll.isVisible = true
@@ -129,7 +129,7 @@ class DashboardFragment : Fragment() {
         }
 
 
-        view.findViewById<RecyclerView>(R.id.recyclerView).adapter = recyclerViewAdapter
+        binding.recyclerView.adapter = recyclerViewAdapter
     }
 
     override fun onDestroyView() {

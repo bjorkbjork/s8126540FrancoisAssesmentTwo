@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">s8126540FrancoisAssessmentTwo</string>
+    <string name="app_name">API RecyclerView App</string>
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
+    <string name="subtitle">Made by Francois van Kempen</string>
     <string name="title_login">Log-in</string>
     <string name="email">Username</string>
     <string name="password">Password</string>
