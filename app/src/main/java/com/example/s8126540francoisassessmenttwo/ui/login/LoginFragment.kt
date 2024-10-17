@@ -29,10 +29,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
-    private lateinit var navigationFunctionLambda: (Keypass) -> Unit
-
-
-
     private var _binding: FragmentLoginBinding? = null
 
     // This property is only valid between onCreateView and
@@ -50,36 +46,24 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        // hide progress bar by default
+        binding.progressBar.isVisible = false
+
         return root
     }
-
-    init{
-
-
-    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // get values of the button, fields, and of the layouts
-
-        val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
         val loginButton: Button = binding.button;
         val firstNameWrapper: TextInputLayout = binding.firstNameWrapper;
         val firstNameField: EditText = binding.editTextFirstName
         val studentIdField: EditText = binding.editTextStudentID;
         val studentIdWrapper: TextInputLayout = binding.studentIdWrapper;
-        val buttonHelperText: TextView = binding.buttonHelperText;
-
-        val loadingScroll: ProgressBar = binding.progressBar;
-
-        loadingScroll.isVisible = false
 
         loginButton.setOnClickListener{
 
-            buttonHelperText.text = ""
             studentIdWrapper.helperText = ""
             firstNameWrapper.helperText=""
 
@@ -91,33 +75,10 @@ class LoginFragment : Fragment() {
             val user = User(firstName,studentId)
 
             if( firstName.isNotEmpty() && studentId.isNotEmpty() ){
+
                 lifecycleScope.launch{
-                    try {
-                        loadingScroll.isVisible = true
-
-                        val result = loginViewModel.logInUser(user)
-
-                        // if keypass returned not as null, then we have a working keypass
-                        if (result.first.value != null) {
-                            loadingScroll.isVisible = false
-                            Log.v("NIT3213", "${result.first.value}")
-                            findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = result.first.value!!))
-                        } else { // else something has gone wrong, so we have errors to handle
-                            loadingScroll.isVisible = false
-
-                            Log.v("NIT3213", "${result.second.value}")
-
-                            val error = result.second.value!!.message;
-
-                            // display errors to user
-                            buttonHelperText.text = resources.getString(error!!.toInt())
-                        }
-                    } catch(ex: Exception){
-                        Log.v("NIT3213", "$ex")
-                    }
+                    logInUser(user)
                 }
-
-                //navigationFunctionLambda = { findNavController().navigate(LoginFragmentDirections.loggedIn(user = it)) }
 
             } else{
                 // Sets helper text to 'required' if users attempt to log in without typing in username or password
@@ -130,6 +91,44 @@ class LoginFragment : Fragment() {
         }
 
 
+    }
+
+
+    // extract logInUser to separate function
+    private suspend fun logInUser(user: User){
+
+
+        val buttonHelperText: TextView = binding.buttonHelperText;
+        val loadingScroll: ProgressBar = binding.progressBar;
+        val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        loadingScroll.isVisible = false
+        buttonHelperText.text = ""
+
+        try {
+
+            loadingScroll.isVisible = true
+
+            val result = loginViewModel.logInUser(user)
+
+            // if keypass returned not as null, then we have a working keypass
+            if (result.first.value != null) {
+                loadingScroll.isVisible = false
+                Log.v("NIT3213", "${result.first.value}")
+                findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = result.first.value!!))
+            } else { // else something has gone wrong, so we have errors to handle
+                loadingScroll.isVisible = false
+
+                Log.v("NIT3213", "${result.second.value}")
+
+                val error = result.second.value!!.message;
+
+                // display errors to user
+                buttonHelperText.text = resources.getString(error!!.toInt())
+            }
+        } catch(ex: Exception){
+            Log.v("NIT3213", "$ex")
+        }
     }
 
 

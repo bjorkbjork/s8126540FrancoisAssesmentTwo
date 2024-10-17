@@ -43,6 +43,9 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //
+
+
         binding.itemCode.text = arguments.entity.courseCode
         binding.itemName.text = arguments.entity.courseName
         binding.intText.text = context?.getString(R.string.credits, arguments.entity.credits)

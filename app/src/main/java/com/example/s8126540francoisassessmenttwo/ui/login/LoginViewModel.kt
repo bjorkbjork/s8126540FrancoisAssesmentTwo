@@ -33,51 +33,10 @@ import javax.inject.Named
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRepositoryClass, private val exceptions: Exceptions): ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-
     val keypass = MutableStateFlow<Keypass?>(value = null)
     val errors = MutableStateFlow<Exception?>(value = null)
-    val result = MutableStateFlow<Pair<MutableStateFlow<Keypass?>, MutableStateFlow<Exception?>>>(Pair(keypass, errors))
-
-//    var responseData = MutableLiveData<ItemData>()
-
-    init{
-//        val data:Entity
-//        viewModelScope.launch(Dispatchers.IO) {
-//            try {
-//
-//                val result:(suspend () -> ItemData) = suspend { repository.getAllObjectsData("courses") }
-//                responseData.postValue(result.invoke())
-//
-//
-//            } catch (ex:Exception){
-//                Log.v("Errors","$ex")
-//            }
-//        }
-//        viewModelScope.launch {
-//            val x = getData("courses")
-//            delay(10000)
-//            Log.v("NIT3213","$x")
-//        }
-    }
 
     suspend fun logInUser(user: User): Pair<MutableStateFlow<Keypass?>, MutableStateFlow<Exception?>> {
-//            viewModelScope.launch(Dispatchers.IO) {
-//                try {
-//                    // since API returns Keypass(keypass="x"), and that is how I structured my class, create lambda function
-//                    val result: (suspend () -> Keypass) = suspend { repository.addUser(user) }
-//                    keypass.value = (result.invoke())
-//                } catch (ex:Exception){
-//                    Log.v("Errors","$ex")
-//                    errors.value = ex
-//                    keypass.value = null
-//                }
-//            }
-//            // return keypass, plus any errors
-//            result.value = Pair(keypass, errors)
-//            return result.value
 
             return withContext(Dispatchers.IO){
                  try{
@@ -116,6 +75,4 @@ class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRe
             }
     }
 
-
-    val text: LiveData<String> = _text
 }

@@ -25,11 +25,6 @@ import javax.inject.Inject
 @HiltViewModel
 class DashboardViewModel @Inject constructor(private val repository: RestfulApiDevRepositoryClass, private val exceptions:Exceptions): ViewModel() {
 
-    //var responseData = MutableLiveData<ItemData>()
-    init{
-
-    }
-
     private val errors = MutableStateFlow<Exception?>(value = null)
     private val responseData = MutableStateFlow<ItemData?>(value = null)
 
