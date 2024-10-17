@@ -27,7 +27,7 @@
 
             <TextView
                 android:id="@+id/itemCode"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
@@ -36,12 +36,14 @@
                 android:textColor="#303F9F"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/itemName"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Name" />
 
             <TextView
                 android:id="@+id/itemName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -51,11 +53,14 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="ID: 2" />
+                tools:text="ID: 2"
+                app:layout_constraintStart_toEndOf="@id/itemCode"
+                android:gravity="end"
+                app:layout_constraintHorizontal_bias="100"/>
 
             <TextView
                 android:id="@+id/intText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text=""
@@ -65,11 +70,13 @@
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@id/itemCode"
                 app:layout_constraintTop_toBottomOf="@id/itemCode"
+                app:layout_constraintEnd_toStartOf="@id/itemPerson"
+                app:layout_constraintHorizontal_bias="0.0"
                 tools:text="ID: 2" />
 
             <TextView
                 android:id="@+id/itemPerson"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text=""
@@ -78,11 +85,14 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="@id/itemName"
                 app:layout_constraintTop_toBottomOf="@id/itemName"
-                tools:text="More details are available" />
+                tools:text="More details are available"
+                app:layout_constraintStart_toEndOf="@id/intText"
+                android:gravity="end"
+                app:layout_constraintHorizontal_bias="100"/>
 
             <TextView
                 android:id="@+id/itemDetials"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text=""
