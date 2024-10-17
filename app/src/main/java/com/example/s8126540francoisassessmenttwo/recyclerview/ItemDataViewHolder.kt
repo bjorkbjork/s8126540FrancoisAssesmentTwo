@@ -19,10 +19,10 @@ class ItemDataViewHolder(private val view: View, private val navigationFunction:
 
     fun bind(itemData: ItemData, position: Int) {
         val entity = itemData.entities[position]
-        courseCode.text = entity.courseCode
-        courseName.text = entity.courseName
-        instructor.text = entity.instructor
-        credits.text = view.context.getString(R.string.credits, entity.credits) // Convert credits (Int) to String
+        courseCode.text = entity.stringKeyOne
+        courseName.text = entity.stringKeyTwo
+        instructor.text = entity.stringKeyThree
+        credits.text = view.context.getString(R.string.credits, entity.intTitle, entity.intKey) // Convert credits (Int) to String
 
         button.text = view.context.getString(R.string.details)
         

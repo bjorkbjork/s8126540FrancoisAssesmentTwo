@@ -40,7 +40,7 @@
     <string name="firstName">First Name</string>
     <string name="studentId">Student ID</string>
     <string name="invalidLogin">Invalid login details</string>
-    <string name="credits">Credits: %1$d</string>
+    <string name="credits">%1$s: %2$d</string>
     <string name="details">Details...</string>
     <string name="back">BACK</string>
     <string name="timeout">Please try again later</string>

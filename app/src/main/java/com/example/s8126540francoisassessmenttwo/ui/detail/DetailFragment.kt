@@ -4,18 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.s8126540francoisassessmenttwo.databinding.FragmentDetailBinding
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-import android.util.Log
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.s8126540francoisassessmenttwo.R
-import com.example.s8126540francoisassessmenttwo.ui.dashboard.DashboardFragmentArgs
-import javax.inject.Named
 
 class DetailFragment : Fragment() {
 
@@ -46,11 +39,11 @@ class DetailFragment : Fragment() {
         //
 
 
-        binding.itemCode.text = arguments.entity.courseCode
-        binding.itemName.text = arguments.entity.courseName
-        binding.intText.text = context?.getString(R.string.credits, arguments.entity.credits)
-        binding.itemPerson.text = arguments.entity.instructor
-        binding.itemDetials.text = arguments.entity.description
+        binding.itemCode.text = arguments.entity.stringKeyOne
+        binding.itemName.text = arguments.entity.stringKeyTwo
+        binding.intText.text = context?.getString(R.string.credits, arguments.entity.intTitle, arguments.entity.intKey)
+        binding.itemPerson.text = arguments.entity.stringKeyThree
+        binding.itemDetials.text = arguments.entity.stringKeyFour
 
         val button = binding.navigationButton
 
