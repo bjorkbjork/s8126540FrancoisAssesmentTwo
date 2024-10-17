@@ -13,6 +13,7 @@ import com.example.s8126540francoisassessmenttwo.data.ItemData
 import com.example.s8126540francoisassessmenttwo.data.Keypass
 import com.example.s8126540francoisassessmenttwo.data.RestfulApiDevRepositoryClass
 import com.example.s8126540francoisassessmenttwo.data.User
+import com.squareup.moshi.JsonDataException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Delay
 import kotlinx.coroutines.Dispatchers
@@ -21,13 +22,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 import javax.inject.Inject
+import javax.inject.Named
 
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRepositoryClass): ViewModel() {
+class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRepositoryClass, private val exceptions: Exceptions): ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"
@@ -74,6 +78,7 @@ class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRe
 //            // return keypass, plus any errors
 //            result.value = Pair(keypass, errors)
 //            return result.value
+
             return withContext(Dispatchers.IO){
                  try{
                      // since API returns Keypass(keypass="x"), and that is how I structured my class, create lambda function
@@ -85,16 +90,26 @@ class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRe
 
                  } catch(ex:Exception){
 
-                     if (ex is SocketTimeoutException) Log.v("NIT3213", "SocketTimeout: $ex");
+                     Log.v("NIT3213", "Exception: $ex");
 
                      // set keypass to null, as something has gone wrong
                      keypass.value = null
-                     // check for matches in Retrofit exception
-                     val error = Regex(ex.toString())
-                     // set value of errors based upon regex
-                     errors.value = if (error.containsMatchIn("timeout")) Exception("timeout");
-                                    else if (error.containsMatchIn("400")) Exception("invalid")
-                                    else ex
+
+                    // set returned error based on value of ex
+                     errors.value = when(ex){
+                         is SocketTimeoutException -> exceptions.timeout
+                         is HttpException -> {
+                             when (ex.code()){
+                                 404 -> exceptions.noSuchDetails
+                                 400 -> exceptions.invalidDetails
+                                 500 -> exceptions.serverError
+                                 else -> ex
+                             }
+                         }
+                         is JsonDataException -> exceptions.jsonError
+                         is UnknownHostException -> exceptions.offline
+                         else -> ex
+                     }
                  }
                 // return tuple, keypass and errors
                 Pair(keypass,errors)

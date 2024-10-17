@@ -11,7 +11,7 @@ import retrofit2.http.POST
 interface RestfulApiDevService {
 
     @GET("dashboard/{keypass}")
-    suspend fun getAllObjects(@Path("keypass") keypass:String): ItemData
+    suspend fun getAllObjects(@Path("keypass") keypass:String?): ItemData
 
     @POST("footscray/auth")
     suspend fun addObject( @Body data: User): Keypass

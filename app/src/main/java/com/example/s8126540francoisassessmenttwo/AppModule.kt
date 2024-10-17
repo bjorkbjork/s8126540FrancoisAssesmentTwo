@@ -30,9 +30,10 @@ object AppModule {
         return RestfulApiDevRetrofitClient().restfulApiDevService
     }
 
+    @Singleton
     @Provides
-    fun provideHttpExceptions(): List<Exception> {
-        return listOf(Exceptions().invalid, Exceptions().timeout, Exceptions().offline)
+    fun provideHttpExceptions(): Exceptions {
+        return Exceptions()
     }
 
 }

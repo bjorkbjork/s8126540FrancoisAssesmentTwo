@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class RestfulApiDevRepositoryClass @Inject constructor(private val restfulDevApiService: RestfulApiDevService) {
 
-    suspend fun getAllObjectsData(item: String) = restfulDevApiService.getAllObjects(keypass = item)
+    suspend fun getAllObjectsData(item: Keypass) = restfulDevApiService.getAllObjects(keypass = item.keypass)
 
     suspend fun addUser(item: User) = restfulDevApiService.addObject(data = item)
 }

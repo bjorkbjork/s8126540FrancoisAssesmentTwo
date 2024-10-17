@@ -80,6 +80,8 @@ class LoginFragment : Fragment() {
         loginButton.setOnClickListener{
 
             buttonHelperText.text = ""
+            studentIdWrapper.helperText = ""
+            firstNameWrapper.helperText=""
 
             // Get email and password values each time the button is clicked
 
@@ -89,7 +91,6 @@ class LoginFragment : Fragment() {
             val user = User(firstName,studentId)
 
             if( firstName.isNotEmpty() && studentId.isNotEmpty() ){
-
                 lifecycleScope.launch{
                     try {
                         loadingScroll.isVisible = true
@@ -106,13 +107,10 @@ class LoginFragment : Fragment() {
 
                             Log.v("NIT3213", "${result.second.value}")
 
-                            val error = result.second.value; val timeout = Exception("timeout"); val invalid = Exception("invalid");
+                            val error = result.second.value!!.message;
 
                             // display errors to user
-                            buttonHelperText.text = if (error == timeout) "Please try again later"
-                                                    else if (error == invalid) resources.getString(R.string.invalidLogin)
-                                                    else "$error"
-
+                            buttonHelperText.text = resources.getString(error!!.toInt())
                         }
                     } catch(ex: Exception){
                         Log.v("NIT3213", "$ex")

@@ -149,13 +149,9 @@ class DashboardFragment : Fragment() {
 
                 loadingScroll.isVisible = false
 
-                val error = data.second.value;
-                val timeout = Exception("timeout");
-                val invalid = Exception("invalid");
+                val error = data.second.value!!.message;
 
-                binding.errorText.text = if (error == timeout) "Please try again later"
-                else if (error == invalid) resources.getString(R.string.invalidLogin)
-                else "$error"
+                binding.errorText.text = resources.getString(error!!.toInt())
             }
         } catch (ex: Exception) {
             Log.v("NIT3213", "$ex")
