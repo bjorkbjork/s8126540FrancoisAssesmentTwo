@@ -49,6 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -62,4 +63,19 @@
         app:layout_constraintTop_toBottomOf="@+id/navigationButton"
         app:layout_constraintVertical_bias="0.1"
         tools:listitem="@layout/item_layout"/>
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:minHeight="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:gravity="center"
+        tools:text="ERRORS" />
 </androidx.constraintlayout.widget.ConstraintLayout>

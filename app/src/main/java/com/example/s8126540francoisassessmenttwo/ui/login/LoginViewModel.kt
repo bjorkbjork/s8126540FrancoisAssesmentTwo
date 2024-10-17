@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import java.net.SocketTimeoutException
 
 import javax.inject.Inject
 
@@ -83,6 +84,9 @@ class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRe
                      errors.value = null
 
                  } catch(ex:Exception){
+
+                     if (ex is SocketTimeoutException) Log.v("NIT3213", "SocketTimeout: $ex");
+
                      // set keypass to null, as something has gone wrong
                      keypass.value = null
                      // check for matches in Retrofit exception
