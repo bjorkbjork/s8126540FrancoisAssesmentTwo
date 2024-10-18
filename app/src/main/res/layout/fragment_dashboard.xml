@@ -27,8 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         app:cornerRadius="8dp"
-        android:backgroundTint="#00BCD4"
+        android:backgroundTint="@color/green"
         android:text="Log out"
+        android:textColor="@color/design_default_color_on_primary"
         app:layout_constraintTop_toTopOf="@id/screenTitle"
         app:layout_constraintStart_toStartOf="parent"
 
@@ -47,7 +48,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminateTint="@color/green"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

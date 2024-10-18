@@ -136,10 +136,12 @@
         android:minHeight="200dp"
         android:mirrorForRtl="false"
         android:progressDrawable="@drawable/circular_progress_bar"
+        android:indeterminateTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="100dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
