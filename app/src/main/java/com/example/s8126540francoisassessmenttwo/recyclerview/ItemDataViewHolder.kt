@@ -21,8 +21,9 @@ class ItemDataViewHolder(private val view: View, private val navigationFunction:
         val entity = itemData.entities[position]
         courseCode.text = entity.stringKeyOne
         courseName.text = entity.stringKeyTwo
-        instructor.text = entity.stringKeyThree
-        credits.text = view.context.getString(R.string.credits, entity.intTitle, entity.intKey) // Convert credits (Int) to String
+        instructor.text = if (entity.stringKeyFour.isNotEmpty()) entity.stringKeyThree else ""
+        credits.text = if(entity.intKey != 0) view.context.getString(R.string.credits, entity.intTitle, entity.intKey) else entity.stringKeyFour // Convert credits (Int) to String
+
 
         button.text = view.context.getString(R.string.details)
         

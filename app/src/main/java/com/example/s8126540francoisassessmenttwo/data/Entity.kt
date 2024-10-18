@@ -11,6 +11,7 @@ data class Entity(
     val stringKeyTwo: String,
     val stringKeyThree: String,
     val stringKeyFour: String,
+    val stringKeyFive: String,
     val intKey: Int,
     val intTitle: String,
 ):Parcelable

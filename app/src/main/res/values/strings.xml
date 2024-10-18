@@ -50,4 +50,7 @@
     <string name="not_connected_to_network">Not connected to network</string>
     <string name="json_error">Server responded in unexpected JSON format</string>
     <string name="server_error">Server experienced internal error: Contact VU Administration for help.</string>
+    <string name="noSupportMessage">The floating point integers returned by the API break my JSON adapter, and I cannot be asked to fix it for one edge case. Sorry Kayvan.</string>
+    <string name="notSupported">Account Not Supported</string>
+    <string name="okay">Okay</string>
 </resources>

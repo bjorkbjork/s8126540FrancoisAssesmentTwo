@@ -1,6 +1,8 @@
 package com.example.s8126540francoisassessmenttwo.ui.login
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -113,9 +115,16 @@ class LoginFragment : Fragment() {
 
             // if keypass returned not as null, then we have a working keypass
             if (result.first.value != null) {
+
+                val keypass = result.first.value!!
+
                 loadingScroll.isVisible = false
                 Log.v("NIT3213", "${result.first.value}")
-                findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = result.first.value!!))
+
+                if (keypass.keypass == "investments") alertUser()
+
+                else findNavController().navigate(LoginFragmentDirections.loggedIn(keypass = keypass))
+
             } else { // else something has gone wrong, so we have errors to handle
                 loadingScroll.isVisible = false
 
@@ -129,6 +138,23 @@ class LoginFragment : Fragment() {
         } catch(ex: Exception){
             Log.v("NIT3213", "$ex")
         }
+    }
+
+    fun alertUser(){
+        val alert = AlertDialog.Builder(this@LoginFragment.context)
+
+        // Sets message and title from strings.xml file
+        alert.setMessage(getString(R.string.noSupportMessage))
+        alert.setTitle(getString(R.string.notSupported))
+        alert.setPositiveButton(getString(R.string.okay)) { _, _ ->
+            binding.editTextFirstName.text.clear()
+            binding.editTextStudentID.text.clear()
+        }
+
+
+        // create alert dialog and display on click
+        val alertDialog = alert.create()
+        alertDialog.show()
     }
 
 

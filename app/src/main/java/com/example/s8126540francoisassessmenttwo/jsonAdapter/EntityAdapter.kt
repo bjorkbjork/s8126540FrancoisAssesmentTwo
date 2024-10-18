@@ -7,6 +7,7 @@ import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 import com.squareup.moshi.ToJson
 import java.io.IOException
+import kotlin.time.Duration.Companion.milliseconds
 
 
 // Custom EntityAdapter for dynamic mapping, allowing other students to use the app.
@@ -20,6 +21,7 @@ class EntityAdapter : JsonAdapter<Entity>() {
         var stringKeyTwo = ""
         var stringKeyThree = ""
         var stringKeyFour = ""
+        var stringKeyFive = ""
         var intKey = 0
         var intTitle = ""
 
@@ -28,15 +30,6 @@ class EntityAdapter : JsonAdapter<Entity>() {
         while (reader.hasNext()) {
             var key = reader.nextName()
             when (reader.peek()) {
-                JsonReader.Token.STRING -> {
-                    val value = reader.nextString()
-                    when {
-                        stringKeyOne.isEmpty() -> stringKeyOne = value
-                        stringKeyTwo.isEmpty() -> stringKeyTwo = value
-                        stringKeyThree.isEmpty() -> stringKeyThree = value
-                        stringKeyFour.isEmpty() -> stringKeyFour = value
-                    }
-                }
                 JsonReader.Token.NUMBER -> {
                     intKey = reader.nextInt()
 
@@ -46,12 +39,24 @@ class EntityAdapter : JsonAdapter<Entity>() {
                     // make first letter uppercase always
                     intTitle = key.replaceFirstChar{ it.uppercase() }
                 }
+                JsonReader.Token.STRING -> {
+                    val value = reader.nextString()
+                    when {
+                        stringKeyOne.isEmpty() -> stringKeyOne = value
+                        stringKeyTwo.isEmpty() -> stringKeyTwo = value
+                        stringKeyThree.isEmpty() -> stringKeyThree = value
+                        stringKeyFour.isEmpty() -> stringKeyFour = value
+                        intKey == 0 -> stringKeyFive = value
+                        stringKeyFive.isEmpty() -> stringKeyFive = value
+                    }
+                }
                 else -> reader.skipValue()  // Skip unexpected tokens
+
             }
         }
         reader.endObject()
 
-        return Entity(stringKeyOne, stringKeyTwo, stringKeyThree, stringKeyFour, intKey, intTitle)
+        return Entity(stringKeyOne, stringKeyTwo, stringKeyThree, stringKeyFour, stringKeyFive, intKey, intTitle)
     }
 
     @Throws(IOException::class)

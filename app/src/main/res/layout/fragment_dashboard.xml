@@ -29,6 +29,7 @@
         app:cornerRadius="8dp"
         android:backgroundTint="@color/green"
         android:text="Log out"
+        android:layout_marginTop="-12dp"
         android:textColor="@color/design_default_color_on_primary"
         app:layout_constraintTop_toTopOf="@id/screenTitle"
         app:layout_constraintStart_toStartOf="parent"

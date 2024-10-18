@@ -37,13 +37,17 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //
+        val entity = arguments.entity
 
+        binding.itemCode.text = entity.stringKeyOne
+        binding.itemName.text = entity.stringKeyTwo
+        binding.intText.text = if(entity.intKey != 0) context?.getString(R.string.credits, entity.intTitle, entity.intKey) else entity.stringKeyFour // Convert credits
+        binding.itemPerson.text = if (entity.stringKeyFour.isNotEmpty()) entity.stringKeyThree else ""
+        binding.itemDetials.text = entity.stringKeyFive.ifEmpty { entity.stringKeyFour.ifEmpty { entity.stringKeyThree } }
 
-        binding.itemCode.text = arguments.entity.stringKeyOne
-        binding.itemName.text = arguments.entity.stringKeyTwo
-        binding.intText.text = context?.getString(R.string.credits, arguments.entity.intTitle, arguments.entity.intKey)
-        binding.itemPerson.text = arguments.entity.stringKeyThree
-        binding.itemDetials.text = arguments.entity.stringKeyFour
+        if (entity.stringKeyFive.length < entity.stringKeyFour.length){
+            binding.itemDetials.text = entity.stringKeyFour
+        }
 
         val button = binding.navigationButton
 
