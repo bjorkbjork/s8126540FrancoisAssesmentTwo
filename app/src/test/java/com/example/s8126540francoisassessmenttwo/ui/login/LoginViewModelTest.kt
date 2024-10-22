@@ -118,7 +118,7 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun `getData should handle JsonDataException`() = runTest {
+    fun `logInUser should handle JsonDataException`() = runTest {
         // Given: A keypass and a JsonDataException
         val user = User("Francois", "s8126540")
 
@@ -136,7 +136,7 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun `getData should handle UnknownHostException`() = runTest {
+    fun `logInUser should handle UnknownHostException`() = runTest {
         // Given: Valid user and mocked exception
         val user = User("Francois", "s8126540")
 
