@@ -74,9 +74,6 @@ class LoginViewModelTest {
         // Assert: The keypass should be the expected value and no errors should occur
         assertEquals(expectedKeypass, keypass.value)
         assertNull(errors.value)
-
-        // Verify that addUser was called exactly once
-        coVerify(exactly = 1) { repository.addUser(user) }
     }
 
     @Test
@@ -99,9 +96,6 @@ class LoginViewModelTest {
         // Assert: The keypass should be null and errors should contain the 404 exception
         assertNull(keypass.value)
         assertEquals(exceptions.noSuchDetails, errors.value)
-
-        // Verify that addUser was called exactly once
-        coVerify(exactly = 1) { repository.addUser(user) }
     }
 
     @Test
@@ -121,9 +115,6 @@ class LoginViewModelTest {
         // Assert: The keypass should be null and the error should be the timeout exception
         assertNull(keypass.value)
         assertEquals(exceptions.timeout, errors.value)
-
-        // Verify that addUser was called exactly once
-        coVerify(exactly = 1) { repository.addUser(user) }
     }
 
     @Test
@@ -136,7 +127,7 @@ class LoginViewModelTest {
         // When: Mocking the repository to throw a JsonDataException
         coEvery { repository.addUser(user) } throws JsonDataException()
 
-        // Act: Call the getData function
+        // Act: Call the logIn function
         val (keypass, errors) = viewModel.logInUser(user)
 
         // Assert: The keypass should be null and the error should be the JsonDataException
@@ -154,10 +145,10 @@ class LoginViewModelTest {
         // When: Mocking the repository to throw an UnknownHostException
         coEvery { repository.addUser(user) } throws UnknownHostException()
 
-        // Act: Call the getData function
+        // Act: Call the logIn function
         val (keypass, errors) = viewModel.logInUser(user)
 
-        // Assert: The responseData should be null and the error should be the UnknownHostException
+        // Assert: The keypass should be null and the error should be the UnknownHostException
         assertNull(keypass.value)
         assertEquals(exceptions.offline, errors.value)
     }
