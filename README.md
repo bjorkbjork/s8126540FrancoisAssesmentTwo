@@ -1,52 +1,30 @@
-# s8126540FrancoisAssesmentTwo
-An Android Mobile App developed for assessment at Victoria Universit
+# s8126540FrancoisAssessmentTwo
+An Android Mobile App developed for assessment at Victoria University
 
 The API was provided by Victoria University. If you are experiencing timeout errors, or internal server errors, take it up with VU administration. Not me.
 
-The API returns different keys based on which user has logged-in, however I have implemented dynamic JSON mapping with Moshi.
+The API returns different key/value pairs based on which user has logged-in, however I have implemented dynamic JSON mapping with Moshi.
+
+There were some edge cases that my adapter didn't handle very well, including one set of data accessed with the 'investments' keypass, which returned two floating point numbers, and would always throw a JSON Data exception.
+I've simply implemented a check in the login to detect if this keypass is returned, display a warning message, and not allow the user to log-in.
 
 UI formatting was taken either from my previous assignment (log-in screen), or from the recyclerview example provided by VU (dashboard and details screen) with minor modifications made.
-All credit to original authors.
+All credit to original authors of the VU examples.
 
 Feel free to do whatever you want with this codebase.
 I will leave it up as apart of my portfolio, as I am proud of this project.
 
-# This app will take any of the following First Name, Student ID pairs:
-- s4551385 Agot 
-- s4637676 Alpha 
-- s4643125 Shaun 
-- s4645156 Aidan 
-- s4656742 Callum 
-- s4658377 Wynton
-- s4669098 Liam 
-- s4669259 Newt 
-- s4669738 Manas 
-- s4670360 Rachel
-- s4671689 Sakar 
-- s4671847 Jayesh 
-- s4672291 Aurelio 
-- s4673381 Taylah
-- s4673382 Daniel 
-- s4674575 Kayvan --> The data returned for this log-in breaks my JSON adapter in ways that the others didn't, and in ways I cannot be bothered fixing.
-- s4675959 Abin 
-- s4676227 Yatharth
-- s4676997 William
-- s4677713 Ishani 
-- s4677891 Rubins 
-- s4677960 Pravesh 
-- s4679530 Aashraya
-- s4680098 Safal 
-- s4680394 Hein 
-- s4680730 Anup 
-- s4685483 Victor 
-- s8005276 Cayden 
-- s8006471 Phong
-- s8069266 Joya 
-- s8082164 Emre 
-- s8082665 Jared 
-- s8089018 Matthew 
-- s8093929 Lachlan 
-- s8102724 Meverly 
-- s8104153 Aklesia 
-- s8126540 Francois 
+# API will likely be shut down once this class has completed
 
+The code is still a good example of networking and UI design.
+
+- Working First name / StudentID pairs can be access by any NIT3213 users through VU Collaborate.
+
+# Setup Instructions:
+
+- There isn't much setup work needed, if you download the repo and run it in Android Studio, it should run out of the box. 
+- My student ID and name can be found in the title of this project, so feel free to test it with my name/id combo.
+- If you have access to VU Collaborate, you can iterate through each name/id pair found.
+
+
+# Enjoy

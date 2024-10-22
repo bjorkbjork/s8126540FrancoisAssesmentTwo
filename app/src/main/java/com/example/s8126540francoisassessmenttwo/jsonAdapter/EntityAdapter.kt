@@ -68,7 +68,8 @@ class EntityAdapter : JsonAdapter<Entity>() {
             writer.name("stringKeyTwo").value(value.stringKeyTwo)
             writer.name("stringKeyThree").value(value.stringKeyThree)
             writer.name("stringKeyFour").value(value.stringKeyFour)
-            writer.name("intKey").value(value.intKey)
+            writer.name("stringKeyFive").value(value.stringKeyFive)
+            writer.name(value.intTitle).value(value.intKey)
         }
         writer.endObject()
     }

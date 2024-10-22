@@ -15,8 +15,6 @@ class DetailFragment : Fragment() {
     private val arguments: DetailFragmentArgs by navArgs()
     private var _binding: FragmentDetailBinding? = null
 
-    //private val detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -36,17 +34,18 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //
         val entity = arguments.entity
 
         binding.itemCode.text = entity.stringKeyOne
         binding.itemName.text = entity.stringKeyTwo
+        // if/else statements are to handle certain cases where there are 5 strings, instead of 4, or if there is no Int
         binding.intText.text = if(entity.intKey != 0) context?.getString(R.string.credits, entity.intTitle, entity.intKey) else entity.stringKeyFour // Convert credits
         binding.itemPerson.text = if (entity.stringKeyFour.isNotEmpty()) entity.stringKeyThree else ""
         binding.itemDetials.text = entity.stringKeyFive.ifEmpty { entity.stringKeyFour.ifEmpty { entity.stringKeyThree } }
 
         if (entity.stringKeyFive.length < entity.stringKeyFour.length){
             binding.itemDetials.text = entity.stringKeyFour
+            binding.itemPerson.text = entity.stringKeyFive
         }
 
         val button = binding.navigationButton

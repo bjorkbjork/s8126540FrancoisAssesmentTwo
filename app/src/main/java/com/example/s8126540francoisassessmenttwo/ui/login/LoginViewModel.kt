@@ -59,7 +59,9 @@ class LoginViewModel @Inject constructor(private val repository: RestfulApiDevRe
                          is SocketTimeoutException -> exceptions.timeout
                          is HttpException -> {
                              when (ex.code()){
-                                 404 -> exceptions.noSuchDetails
+                                 // make 404 and 400 return same error message -> that way valid usernames can't be found by brute-forcing random strings
+                                 // makes system more secure
+                                 404 -> exceptions.invalidDetails
                                  400 -> exceptions.invalidDetails
                                  500 -> exceptions.serverError
                                  else -> ex

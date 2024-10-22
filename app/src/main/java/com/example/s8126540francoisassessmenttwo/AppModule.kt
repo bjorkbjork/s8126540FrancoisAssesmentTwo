@@ -15,15 +15,6 @@ import javax.inject.Named
 @InstallIn(SingletonComponent::class)
 
 object AppModule {
-    @Singleton
-    @Provides
-    @Named("StringOne")
-    fun provideStringOne():String {return "This is the value of string one, from the Application Module"}
-
-    @Singleton
-    @Provides
-    @Named("StringTwo")
-    fun provideStringTwo():String {return "This is the value of string two, from the Application Module"}
 
     @Provides
     fun provideRestfulApiDevService(): RestfulApiDevService {

@@ -72,19 +72,19 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    testImplementation(libs.mockk.v1132) // Core MockK library for local unit tests
-    testImplementation(libs.mockk.android.v1123) // Android-specific MockK for local unit tests
-    testImplementation(libs.mockk.agent.v1132) // MockK agent for advanced mocking (e.g., static methods)
+    testImplementation(libs.mockk) // Core MockK library for local unit tests
+    testImplementation(libs.mockk.android) // Android-specific MockK for local unit tests
+    testImplementation(libs.mockk.agent) // MockK agent for advanced mocking (e.g., static methods)
     testImplementation(libs.junit) // JUnit for local unit tests
     testImplementation(libs.jetbrains.kotlinx.coroutines.test)
     testImplementation(libs.androidx.core.testing)
 
     // Instrumented test dependencies (run on an Android device or emulator)
-    androidTestImplementation (libs.mockk.android.v1123)// Android- specific MockK for instrumented tests
-    androidTestImplementation(libs.mockk.agent.v1132) // MockK agent for advanced mocking in instrumented tests
-    androidTestImplementation(libs.androidx.junit.v113) // AndroidX JUnit for instrumented tests
-    androidTestImplementation(libs.jetbrains.kotlinx.coroutines.test)
-    androidTestImplementation(libs.androidx.core.testing)
+    androidTestImplementation (libs.mockk.android)// Android- specific MockK for instrumented tests
+    androidTestImplementation(libs.mockk.agent) // MockK agent for advanced mocking in instrumented tests
+    //androidTestImplementation(libs.androidx.junit) // AndroidX JUnit for instrumented tests
+    //androidTestImplementation(libs.jetbrains.kotlinx.coroutines.test)
+    //androidTestImplementation(libs.androidx.core.testing)
 
 
 

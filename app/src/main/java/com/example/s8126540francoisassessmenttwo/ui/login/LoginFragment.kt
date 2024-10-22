@@ -140,7 +140,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    fun alertUser(){
+    private fun alertUser(){
         val alert = AlertDialog.Builder(this@LoginFragment.context)
 
         // Sets message and title from strings.xml file
